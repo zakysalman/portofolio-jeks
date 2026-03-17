@@ -3,50 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Portfolio: Professional Trader Trainer</title>
+    <title>Trader Portfolio</title>
     <style>
-        :root { --dark-bg: #121212; --dark-surface: #1e1e1e; --accent-purple: #9c27b0; --accent-gold: #ffc107; --text-light: #e0e0e0; }
-        body { font-family: sans-serif; background-color: var(--dark-bg); color: var(--text-light); margin: 0; line-height: 1.6; }
-        nav { position: fixed; top: 0; width: 100%; background: rgba(18,18,18,0.9); display: flex; justify-content: space-between; padding: 10px 5%; z-index: 100; align-items: center; }
-        .logo-nav { height: 40px; filter: drop-shadow(0 0 5px var(--accent-purple)); }
-        #hero { height: 100vh; display: flex; align-items: center; justify-content: center; padding: 0 10%; gap: 20px; flex-wrap: wrap; text-align: center; }
-        .hero-img { width: 250px; height: 250px; border-radius: 50%; border: 3px solid var(--accent-purple); object-fit: cover; }
-        .btn-gold { background: var(--accent-gold); color: #111; padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 5px; display: inline-block; margin-top: 15px; }
-        #gallery { padding: 50px 10%; background: var(--dark-surface); }
-        .gallery-item { margin-bottom: 40px; text-align: center; }
-        .gallery-item img { width: 100%; max-width: 600px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        body { background-color: #121212; color: white; font-family: sans-serif; text-align: center; margin: 0; padding: 0; }
+        nav { padding: 20px; background: #1e1e1e; }
+        .logo { height: 60px; filter: drop-shadow(0 0 10px purple); }
+        .profile-img { width: 200px; height: 200px; border-radius: 50%; border: 3px solid #ffc107; object-fit: cover; margin-top: 20px; }
+        .container { padding: 40px 10%; }
+        .card { background: #1e1e1e; margin-bottom: 20px; padding: 20px; border-radius: 10px; }
+        .card img { width: 100%; max-width: 500px; border-radius: 10px; }
+        h1 { color: #ffc107; }
     </style>
 </head>
 <body>
 
     <nav>
-        <img src="logo.jpg" alt="Logo" class="logo-nav">
-        <div style="font-weight: bold;">TRADER TRAINER</div>
+        <img src="logo.jpg" alt="Logo" class="logo">
     </nav>
 
-    <section id="hero">
-        <img src="wajah.jpg" alt="Wajah Saya" class="hero-img">
-        <div>
-            <h1>Mastering Markets from Minimalist Space</h1>
-            <p>Disiplin, Data, dan Mindset Professional Trading.</p>
-            <a href="#gallery" class="btn-gold">Lihat Setup Saya</a>
-        </div>
-    </section>
+    <div class="container">
+        <img src="wajah.jpg" alt="Wajah" class="profile-img">
+        <h1>Professional Trader Trainer</h1>
+        <p>Disiplin, Data, dan Mindset.</p>
 
-    <section id="gallery">
-        <div class="gallery-item">
-            <h3>The Practitioner's Lab</h3>
-            <img src="keahlian.jpg" alt="Trading Setup">
+        <div class="card">
+            <h3>Trading Setup</h3>
+            <img src="keahlian.jpg" alt="Setup">
         </div>
-        <div class="gallery-item">
-            <h3>Focus & Discipline Zone</h3>
-            <img src="keahlian anlisia.jpg" alt="Focus Zone">
-        </div>
-    </section>
 
-    <footer style="text-align: center; padding: 20px; font-size: 0.8rem; color: #666;">
-        &copy; 2026 Professional Trader Portfolio
-    </footer>
+        <div class="card">
+            <h3>Analisis & Fokus</h3>
+            <img src="keahlian%20anlisia.jpg" alt="Analisis">
+        </div>
+    </div>
+
+    <footer style="padding: 20px; color: #555;">&copy; 2026 Portofolio Jeks</footer>
 
 </body>
 </html>
