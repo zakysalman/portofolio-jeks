@@ -14,7 +14,6 @@
             --star-gold: #fbbf24;
             --star-silver: #e2e8f0;
             --cyber-neon: #00ffff;
-            --cyber-neon-dim: rgba(0, 255, 255, 0.3);
             --text-white: #ffffff;
             --border-glass: rgba(255, 255, 255, 0.1);
         }
@@ -24,11 +23,10 @@
         body { 
             font-family: 'Inter', sans-serif; 
             color: var(--text-white);
-            min-height: 100vh;
-            overflow-x: hidden;
             background: linear-gradient(125deg, #050505, #1a0b2e, #0a0514, #001a33, #1a0b2e);
             background-size: 400% 400%;
             animation: cyberFlow 15s ease infinite;
+            overflow-x: hidden;
         }
 
         @keyframes cyberFlow {
@@ -37,132 +35,107 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* ----------------------------------------------------------- */
-        /* [BARU] ANIMASI FOTO PROFIL (PULSE & GLOW) */
-        /* ----------------------------------------------------------- */
-        @keyframes profilePulse {
-            0% { transform: scale(1); box-shadow: 0 0 20px var(--cyber-neon-dim); }
-            50% { transform: scale(1.03); box-shadow: 0 0 40px rgba(0, 255, 255, 0.5); }
-            100% { transform: scale(1); box-shadow: 0 0 20px var(--cyber-neon-dim); }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+        
+        nav {
+            padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
+            backdrop-filter: blur(15px); background: rgba(0,0,0,0.7);
+            position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border-glass);
+        }
+
+        .hero { padding: 60px 0 30px; text-align: center; }
+        
+        .profile-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 25px;
+            z-index: 10;
         }
 
         .profile-img { 
             width: 150px; height: 150px; border-radius: 50%; 
-            border: 2px solid var(--cyber-neon); z-index: 10; position: relative;
-            object-fit: cover;
-            /* JALANKAN ANIMASI PULSE */
-            animation: profilePulse 4s ease-in-out infinite;
-            transition: 0.3s ease;
-        }
-        .profile-img:hover { animation-play-state: paused; transform: scale(1.05); }
-
-        /* ----------------------------------------------------------- */
-        /* [BARU] ANIMASI GAMBAR KARTU (HOVER ZOOM) */
-        /* ----------------------------------------------------------- */
-        .card-img { 
-            width: 100%; height: 100%; object-fit: cover; 
-            opacity: 0.6; transition: 0.5s ease; 
-        }
-        .card:hover .card-img { 
-            transform: scale(1.1); /* Gambar membesar saat kartu di-hover */
-            opacity: 0.9; 
+            border: 2px solid var(--cyber-neon); 
+            object-fit: cover; position: relative; z-index: 20;
+            cursor: pointer;
+            animation: pulseGlow 4s infinite ease-in-out;
+            transition: 0.3s;
         }
 
-        /* ----------------------------------------------------------- */
-        /* EFEK BLINK / GLINT (UNTUK SEMUA FOTO) */
-        /* ----------------------------------------------------------- */
-        .blink-effect {
-            position: relative; overflow: hidden; display: inline-block;
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(0,255,255,0.2); transform: scale(1); }
+            50% { box-shadow: 0 0 30px rgba(0,255,255,0.5); transform: scale(1.02); }
         }
-        .blink-effect::before {
-            content: '';
-            position: absolute; top: 0; left: -150%;
+
+        .star-particle {
+            position: absolute; top: 50%; left: 50%;
+            width: 10px; height: 10px;
+            background: var(--star-silver);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            z-index: 5; pointer-events: none;
+        }
+
+        .blink-wrap { position: relative; overflow: hidden; border-radius: inherit; }
+        .blink-wrap::after {
+            content: ''; position: absolute; top: 0; left: -150%;
             width: 50%; height: 100%;
             background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
-            transform: skewX(-25deg); z-index: 12;
-            animation: blinkGlint 5s infinite;
+            transform: skewX(-20deg); animation: blinkMove 5s infinite;
         }
-        @keyframes blinkGlint {
+        @keyframes blinkMove {
             0% { left: -150%; }
-            25% { left: 150%; }
+            20% { left: 150%; }
             100% { left: 150%; }
         }
 
-        /* ----------------------------------------------------------- */
-        /* BINTANG SILVER (KHUSUS PROFIL SAAT KLIK) */
-        /* ----------------------------------------------------------- */
-        .star-particle {
-            position: absolute; top: 50%; left: 50%;
-            width: 8px; height: 8px;
-            background: var(--star-silver);
-            box-shadow: 0 0 10px rgba(226, 232, 240, 0.8);
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            pointer-events: none; z-index: 5;
-            transform: translate(-50%, -50%);
-        }
-
-        .flash-active { animation: localFlash 0.5s ease-out; }
-        @keyframes localFlash {
-            0% { filter: brightness(1); }
-            50% { filter: brightness(1.8) drop-shadow(0 0 15px white); }
-            100% { filter: brightness(1); }
-        }
-
-        /* ----------------------------------------------------------- */
-        /* LAYOUT COMPONENTS */
-        /* ----------------------------------------------------------- */
-        nav {
-            padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
-            backdrop-filter: blur(20px); background: rgba(0, 0, 0, 0.6);
-            position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border-glass);
-        }
-
-        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
-        .hero { padding: 60px 0 30px; text-align: center; }
-        
-        .profile-wrapper { 
-            cursor: pointer; margin-bottom: 25px; border-radius: 50%; display: inline-block;
-        }
-
-        .hero h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 5px; letter-spacing: -1px; }
+        .hero h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 5px; }
         .slogan {
             font-size: 1.1rem; font-weight: 700; letter-spacing: 4px;
             color: var(--star-gold); margin-bottom: 35px; display: block;
-            text-transform: uppercase; text-shadow: 0 0 15px var(--star-gold);
+            text-transform: uppercase; text-shadow: 0 0 10px var(--star-gold);
         }
 
-        .glass-box { 
+        /* --- MEGA ABOUT ME BOX --- */
+        .about-box { 
             background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px);
-            padding: 40px; border-radius: 24px; border: 1px solid var(--border-glass);
-            text-align: left; margin-bottom: 50px;
+            padding: 40px; border-radius: 30px; border: 1px solid var(--border-glass);
+            margin-bottom: 50px; text-align: left;
         }
-
-        /* [BARU] JANGAN LUPA ADD TRANSFORM-STYLE UNTUK EFEK TILT */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-        .card { 
-            background: rgba(0, 0, 0, 0.3); border-radius: 20px; 
-            overflow: hidden; border: 1px solid var(--border-glass); 
-            transition: 0.3s ease, transform 0.1s ease; /* Transisi untuk tilt */
-            transform-style: preserve-3d; /* Efek 3D */
-            perspective: 1000px;
-        }
-        .card:hover { border-color: var(--cyber-neon); box-shadow: 0 10px 30px var(--cyber-neon-dim); }
         
-        .card-img-wrapper { 
-            width: 100%; height: 180px; cursor: pointer; overflow: hidden; 
-            position: relative;
+        .section-label { 
+            color: var(--cyber-neon); font-size: 0.75rem; font-weight: 800; 
+            letter-spacing: 4px; margin-bottom: 20px; text-transform: uppercase; 
+            border-left: 3px solid var(--cyber-neon); padding-left: 15px;
         }
 
-        .social-group { display: flex; justify-content: center; gap: 15px; margin-bottom: 50px; }
+        .about-text { font-size: 1.1rem; line-height: 1.8; opacity: 0.9; margin-bottom: 30px; }
+        
+        .vision-mission-text {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 20px; border-radius: 15px; border-left: 4px solid var(--star-gold);
+            margin-bottom: 30px; font-style: italic;
+        }
+
+        /* SOSIAL MEDIA DI DALAM BOX */
+        .social-in-box { display: flex; gap: 15px; border-top: 1px solid var(--border-glass); padding-top: 30px; }
         .btn-social {
-            text-decoration: none; width: 50px; height: 50px; border-radius: 50%;
+            text-decoration: none; width: 45px; height: 45px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            color: white; background: rgba(255,255,255,0.05); 
-            border: 1px solid var(--border-glass); transition: 0.3s;
+            color: white; background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); transition: 0.3s;
         }
-        .btn-social:hover { transform: translateY(-5px); border-color: var(--cyber-neon); box-shadow: 0 0 15px var(--cyber-neon-dim); }
+        .btn-social:hover { transform: translateY(-5px); border-color: var(--cyber-neon); color: var(--cyber-neon); }
 
-        footer { text-align: center; padding: 60px 0; opacity: 0.4; font-size: 0.75rem; letter-spacing: 2px; }
+        /* KEAHLIAN CARDS */
+        .grid-keahlian { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .card { 
+            background: rgba(255,255,255,0.02); border-radius: 20px; 
+            overflow: hidden; border: 1px solid var(--border-glass); transition: 0.3s;
+        }
+        .card:hover { border-color: var(--cyber-neon); }
+        .card-img-wrapper { width: 100%; height: 180px; overflow: hidden; position: relative; }
+        .card-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: 0.5s; }
+        .card:hover .card-img { transform: scale(1.1); opacity: 0.9; }
+
+        footer { text-align: center; padding: 60px 0; opacity: 0.3; font-size: 0.7rem; letter-spacing: 2px; }
     </style>
 </head>
 <body>
@@ -178,31 +151,38 @@
     <div class="container">
         <section class="hero">
             <div data-aos="zoom-in">
-                <div class="profile-wrapper blink-effect" id="profileBtn">
-                    <img src="wajah.jpg" alt="Ahmad Zaky" class="profile-img">
+                <div class="profile-container">
+                    <div class="blink-wrap" style="border-radius: 50%;">
+                        <img src="wajah.jpg" alt="Ahmad Zaky" class="profile-img" id="profileBtn">
+                    </div>
                 </div>
             </div>
-            <h1 data-aos="fade-up">Ahmad Zaky</h1>
-            <span class="slogan" data-aos="fade-up" data-aos-delay="200">Trade Like A Star</span>
+            <h1 data-aos="fade-up" data-aos-delay="200">Ahmad Zaky</h1>
+            <span class="slogan" data-aos="fade-up" data-aos-delay="400">Trade Like A Star</span>
+        </section>
+
+        <div class="about-box" data-aos="fade-up">
+            <p class="section-label">Identity & Vision</p>
             
-            <div class="social-group" data-aos="fade-up" data-aos-delay="400">
+            <div class="about-text">
+                Halo! Saya <strong>Ahmad Zaky</strong>. Sebagai seorang spesialis dalam dunia trading, saya mendedikasikan diri untuk memahami dinamika pasar secara mendalam. Saya percaya bahwa kesuksesan finansial bermula dari kombinasi antara strategi yang tajam dan mentalitas yang tenang.
+            </div>
+
+            <div class="vision-mission-text">
+                "Visi dan misi saya adalah mensinergikan presisi analisis Price Action dengan disiplin manajemen risiko yang ketat untuk mengorkestrasi pertumbuhan portofolio yang stabil dan berkelanjutan bagi masa depan."
+            </div>
+
+            <div class="social-in-box">
                 <a href="https://wa.me/62895383165361" target="_blank" class="btn-social"><i class="fab fa-whatsapp"></i></a>
                 <a href="https://instagram.com/jekys___" target="_blank" class="btn-social"><i class="fab fa-instagram"></i></a>
                 <a href="https://tiktok.com/@whojekys" target="_blank" class="btn-social"><i class="fab fa-tiktok"></i></a>
             </div>
-        </section>
-
-        <div class="glass-box" data-aos="fade-up">
-            <p style="color: var(--cyber-neon); font-size: 0.8rem; letter-spacing: 3px; font-weight: 700; margin-bottom: 10px;">STRATEGIC VISION</p>
-            <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 20px;">Architect of Financial Growth & <br>Technical Analysis Specialist</h2>
-            <p style="opacity: 0.85; line-height: 1.8; font-size: 1.05rem;">
-                "Mensinergikan presisi analisis <span style="color: var(--star-gold); font-weight: 700;">Price Action</span> dengan disiplin manajemen risiko untuk mengorkestrasi pertumbuhan portofolio yang stabil. Saya percaya bahwa kesuksesan trading adalah perpaduan antara teknologi mutakhir, strategi yang matang, dan mentalitas seorang pemenang. Mari mulai perjalanan Anda untuk <span style="color: var(--star-gold); font-weight: 700;">Trade Like A Star★</span>"
-            </p>
         </div>
 
-        <div class="grid">
-            <div class="card" data-aos="fade-right" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-perspective="1000">
-                <div class="card-img-wrapper blink-effect" onclick="handleCardClick(this)">
+        <p class="section-label" data-aos="fade-up" style="border: none; text-align: center; padding: 0;">My Expertise</p>
+        <div class="grid-keahlian">
+            <div class="card" data-aos="fade-right">
+                <div class="card-img-wrapper blink-wrap">
                     <img src="keahlian.jpg" class="card-img" alt="Setup">
                 </div>
                 <div style="padding: 20px;">
@@ -210,8 +190,8 @@
                     <p style="opacity: 0.5; font-size: 0.85rem;">High-precision price action analysis.</p>
                 </div>
             </div>
-            <div class="card" data-aos="fade-left" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-perspective="1000">
-                <div class="card-img-wrapper blink-effect" onclick="handleCardClick(this)">
+            <div class="card" data-aos="fade-left">
+                <div class="card-img-wrapper blink-wrap">
                     <img src="keahlian2.jpg" class="card-img" alt="Analysis">
                 </div>
                 <div style="padding: 20px;">
@@ -225,53 +205,33 @@
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
     <script>
-        // Inisialisasi AOS (Animasi Masuk)
         AOS.init({ duration: 1000, once: true });
 
-        // Inisialisasi VanillaTilt (Animasi Miring Kartu)
-        VanillaTilt.init(document.querySelectorAll(".card"), {
-            max: 10, // Maksimal kemiringan (derajat)
-            speed: 400, // Kecepatan transisi
-            glare: true, // Efek kilau tambahan saat miring
-            "max-glare": 0.2, // Maksimal intensitas kilau
-        });
+        const profileBtn = document.getElementById('profileBtn');
+        const profileContainer = document.querySelector('.profile-container');
 
-        // FUNGSI BINTANG SILVER (HANYA UNTUK PROFIL SAAT KLIK)
-        function createSilverStars(wrapper) {
-            const starCount = 15;
-            for (let i = 0; i < starCount; i++) { 
+        profileBtn.addEventListener('click', function() {
+            for (let i = 0; i < 15; i++) {
                 const star = document.createElement('div');
                 star.classList.add('star-particle');
-                wrapper.appendChild(star);
+                profileContainer.appendChild(star);
+
                 const angle = Math.random() * Math.PI * 2;
-                const velocity = 80 + Math.random() * 100;
-                const x = Math.cos(angle) * velocity;
-                const y = Math.sin(angle) * velocity;
+                const dist = 60 + Math.random() * 80;
+                const x = Math.cos(angle) * dist;
+                const y = Math.sin(angle) * dist;
+
                 star.animate([
-                    { transform: 'translate(-50%, -50%) scale(1)', opacity: 0 },
-                    { transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(0.2)`, opacity: [1, 0] }
-                ], { duration: 1000, easing: 'cubic-bezier(0.1, 0.8, 0.4, 1)' }).onfinish = () => star.remove();
+                    { transform: 'translate(-50%, -50%) scale(0)', opacity: 0 },
+                    { transform: 'translate(-50%, -50%) scale(1.2)', opacity: 1, offset: 0.2 },
+                    { transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(0)`, opacity: 0 }
+                ], {
+                    duration: 1200,
+                    easing: 'cubic-bezier(0.1, 0.8, 0.4, 1)'
+                }).onfinish = () => star.remove();
             }
-        }
-
-        // KLIK PROFIL: Keluar Bintang + Flash
-        const profileBtn = document.getElementById('profileBtn');
-        profileBtn.addEventListener('click', function() {
-            const img = this.querySelector('img');
-            img.classList.add('flash-active');
-            createSilverStars(this);
-            setTimeout(() => img.classList.remove('flash-active'), 500);
         });
-
-        // KLIK KARTU: Hanya Flash (Tanpa Bintang)
-        function handleCardClick(wrapper) {
-            const img = wrapper.querySelector('img');
-            img.classList.add('flash-active');
-            setTimeout(() => img.classList.remove('flash-active'), 500);
-        }
     </script>
 </body>
-                </html>
-    
+</html>
