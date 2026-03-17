@@ -43,7 +43,7 @@
             position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border-glass);
         }
 
-        .hero { padding: 60px 0 30px; text-align: center; }
+        .hero { padding: 60px 0 20px; text-align: center; }
         
         .profile-container {
             position: relative;
@@ -90,39 +90,34 @@
         .hero h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 5px; }
         .slogan {
             font-size: 1.1rem; font-weight: 700; letter-spacing: 4px;
-            color: var(--star-gold); margin-bottom: 35px; display: block;
+            color: var(--star-gold); margin-bottom: 20px; display: block;
             text-transform: uppercase; text-shadow: 0 0 10px var(--star-gold);
         }
 
-        /* --- MEGA ABOUT ME BOX --- */
-        .about-box { 
-            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px);
-            padding: 40px; border-radius: 30px; border: 1px solid var(--border-glass);
-            margin-bottom: 50px; text-align: left;
-        }
-        
-        .section-label { 
-            color: var(--cyber-neon); font-size: 0.75rem; font-weight: 800; 
-            letter-spacing: 4px; margin-bottom: 20px; text-transform: uppercase; 
-            border-left: 3px solid var(--cyber-neon); padding-left: 15px;
-        }
-
-        .about-text { font-size: 1.1rem; line-height: 1.8; opacity: 0.9; margin-bottom: 30px; }
-        
-        .vision-mission-text {
-            background: rgba(255, 255, 255, 0.02);
-            padding: 20px; border-radius: 15px; border-left: 4px solid var(--star-gold);
-            margin-bottom: 30px; font-style: italic;
-        }
-
-        /* SOSIAL MEDIA DI DALAM BOX */
-        .social-in-box { display: flex; gap: 15px; border-top: 1px solid var(--border-glass); padding-top: 30px; }
+        /* SOSIAL MEDIA DI ATAS (Bawah Slogan) */
+        .social-group { display: flex; justify-content: center; gap: 15px; margin-bottom: 50px; }
         .btn-social {
             text-decoration: none; width: 45px; height: 45px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             color: white; background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); transition: 0.3s;
         }
         .btn-social:hover { transform: translateY(-5px); border-color: var(--cyber-neon); color: var(--cyber-neon); }
+
+        /* --- STYLING UNTUK KOTAK KACA (GLASS BOX) --- */
+        .glass-box { 
+            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px);
+            padding: 35px; border-radius: 25px; border: 1px solid var(--border-glass);
+            margin-bottom: 30px; text-align: left;
+        }
+        
+        .section-label { 
+            color: var(--cyber-neon); font-size: 0.75rem; font-weight: 800; 
+            letter-spacing: 4px; margin-bottom: 15px; text-transform: uppercase; 
+            border-left: 3px solid var(--cyber-neon); padding-left: 15px;
+        }
+
+        .about-text { font-size: 1.1rem; line-height: 1.8; opacity: 0.9; }
+        .vision-mission-text { font-size: 1.1rem; font-style: italic; color: #fff; line-height: 1.8; border-left: 4px solid var(--star-gold); padding-left: 20px; }
 
         /* KEAHLIAN CARDS */
         .grid-keahlian { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
@@ -159,23 +154,25 @@
             </div>
             <h1 data-aos="fade-up" data-aos-delay="200">Ahmad Zaky</h1>
             <span class="slogan" data-aos="fade-up" data-aos-delay="400">Trade Like A Star</span>
-        </section>
 
-        <div class="about-box" data-aos="fade-up">
-            <p class="section-label">Identity & Vision</p>
-            
-            <div class="about-text">
-                Halo! Saya <strong>Ahmad Zaky</strong>. Sebagai seorang spesialis dalam dunia trading, saya mendedikasikan diri untuk memahami dinamika pasar secara mendalam. Saya percaya bahwa kesuksesan finansial bermula dari kombinasi antara strategi yang tajam dan mentalitas yang tenang.
-            </div>
-
-            <div class="vision-mission-text">
-                "Visi dan misi saya adalah mensinergikan presisi analisis Price Action dengan disiplin manajemen risiko yang ketat untuk mengorkestrasi pertumbuhan portofolio yang stabil dan berkelanjutan bagi masa depan."
-            </div>
-
-            <div class="social-in-box">
+            <div class="social-group" data-aos="fade-up" data-aos-delay="600">
                 <a href="https://wa.me/62895383165361" target="_blank" class="btn-social"><i class="fab fa-whatsapp"></i></a>
                 <a href="https://instagram.com/jekys___" target="_blank" class="btn-social"><i class="fab fa-instagram"></i></a>
                 <a href="https://tiktok.com/@whojekys" target="_blank" class="btn-social"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </section>
+
+        <div class="glass-box" data-aos="fade-up">
+            <p class="section-label">About Me</p>
+            <div class="about-text">
+                Halo! Saya <strong>Ahmad Zaky</strong>. Sebagai seorang spesialis dalam dunia trading, saya mendedikasikan diri untuk memahami dinamika pasar secara mendalam. Saya percaya bahwa kesuksesan finansial bermula dari kombinasi antara strategi yang tajam dan mentalitas yang tenang.
+            </div>
+        </div>
+
+        <div class="glass-box" data-aos="fade-up" data-aos-delay="100">
+            <p class="section-label" style="border-color: var(--star-gold); color: var(--star-gold);">My Vision & Mission</p>
+            <div class="vision-mission-text">
+                Mensinergikan presisi analisis Price Action dengan disiplin manajemen risiko yang ketat untuk mengorkestrasi pertumbuhan portofolio yang stabil dan berkelanjutan bagi masa depan.
             </div>
         </div>
 
