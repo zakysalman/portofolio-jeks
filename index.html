@@ -20,83 +20,103 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: #fff; overflow-x: hidden; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: #fff; overflow-x: hidden; position: relative; }
 
-        /* --- HEADER --- */
+        /* --- 1. LATAR BELAKANG UNGU HIDUP & BERGERAK --- */
+        .bg-animate {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(168, 85, 247, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.2) 0%, transparent 40%);
+            z-index: -2;
+            animation: moveBg 15s infinite alternate ease-in-out;
+        }
+        @keyframes moveBg {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.1) translate(2%, 2%); }
+        }
+
+        /* --- HEADER & NAV --- */
         header {
             position: fixed; top: 0; width: 100%; z-index: 1000;
             background: rgba(3, 7, 18, 0.9); backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border); padding: 15px 0;
         }
-        .header-container {
-            max-width: 1200px; margin: 0 auto; padding: 0 5%;
-            display: flex; justify-content: space-between; align-items: center;
-        }
+        .header-container { max-width: 1200px; margin: 0 auto; padding: 0 5%; display: flex; justify-content: space-between; align-items: center; }
         .logo-text h2 { font-size: 1.3rem; letter-spacing: 3px; font-weight: 800; text-transform: uppercase; }
 
         .nav-links { display: flex; gap: 25px; list-style: none; align-items: center; }
         .nav-links a, .nav-links span { text-decoration: none; color: #9ca3af; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
-        .nav-links a:hover, .nav-links span:hover { color: #fff; }
+        .nav-links a:hover { color: #fff; }
 
-        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
+        .menu-toggle { display: none; font-size: 1.5rem; color: #fff; cursor: pointer; }
 
-        /* --- MOBILE NAV --- */
-        .mobile-nav {
-            position: fixed; top: 0; right: -100%; width: 70%; height: 100vh;
-            background: var(--bg); z-index: 2000; padding: 80px 40px;
-            display: flex; flex-direction: column; gap: 30px; transition: 0.4s;
-        }
-        .mobile-nav.active { right: 0; }
-        .mobile-nav a, .mobile-nav span { text-decoration: none; color: #fff; font-size: 1.2rem; font-weight: 800; text-transform: uppercase; cursor: pointer; }
-
-        /* --- LOGO BERPUTAR --- */
+        /* --- LOGO BERPUTAR & EFEK TRANSPARAN --- */
         .page-logo-wrapper { display: flex; justify-content: center; align-items: center; margin-bottom: 30px; position: relative; }
-        .rotating-logo-container { width: 150px; height: 150px; position: relative; }
-        .rotating-logo-container img { width: 100%; height: 100%; object-fit: contain; animation: spinY 10s infinite linear; }
-        .glow-effect { position: absolute; width: 120px; height: 120px; background: var(--primary); border-radius: 50%; filter: blur(50px); opacity: 0.4; z-index: -1; animation: pulse 3s infinite alternate; }
-
+        .rotating-logo-container { width: 160px; height: 160px; position: relative; }
+        
+        .rotating-logo-container img {
+            width: 100%; height: 100%; object-fit: contain;
+            animation: spinY 12s infinite linear;
+            /* Trik untuk membuat logo JPG hitam menjadi transparan */
+            mix-blend-mode: screen; 
+            filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.8));
+        }
         @keyframes spinY { from { transform: rotateY(0deg); } to { transform: rotateY(-360deg); } }
-        @keyframes pulse { from { transform: scale(0.9); opacity: 0.3; } to { transform: scale(1.1); opacity: 0.6; } }
 
         /* --- HERO --- */
         .container { max-width: 1100px; margin: 0 auto; padding: 0 5%; }
         .hero { min-height: 100vh; display: flex; align-items: center; justify-content: space-between; gap: 50px; padding-top: 100px; }
-        .hero-text { flex: 1.2; }
-        .slogan { font-size: 1rem; margin-bottom: 10px; font-weight: 800; background: var(--gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px; text-transform: uppercase; }
-        .hero-text h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; }
+        .hero-text { flex: 1.2; text-align: left; }
+        .slogan { font-size: 1.1rem; margin-bottom: 12px; font-weight: 800; background: var(--gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px; text-transform: uppercase; }
+        .hero-text h1 { font-size: 3.8rem; font-weight: 800; margin-bottom: 25px; }
+        .hero-description { color:#9ca3af; font-size: 1.05rem; line-height: 1.8; max-width: 550px; margin-bottom: 30px; }
         
-        .social-icons { display: flex; gap: 15px; margin-top: 30px; }
-        .icon-box { width: 45px; height: 45px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #fff; transition: 0.3s; }
-        .icon-box:hover { border-color: var(--primary); transform: translateY(-5px); }
+        .social-icons { display: flex; gap: 15px; }
+        .icon-box { width: 50px; height: 50px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; transition: 0.3s; }
+        .icon-box:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-5px); box-shadow: 0 5px 20px rgba(168, 85, 247, 0.4); }
 
-        /* --- FOTO TILT --- */
-        .hero-visual { flex: 0.8; display: flex; justify-content: center; }
-        .main-card { width: 300px; padding: 25px; background: #111827; border-radius: 25px; border: 1px solid var(--border); text-align: center; }
-        .profile-img { width: 100%; border-radius: 15px; margin-bottom: 15px; }
+        /* --- FOTO PROFIL TILT & GLOW --- */
+        .hero-visual { flex: 0.8; display: flex; justify-content: center; position: relative; }
+        .main-card { width: 320px; padding: 25px; background: #111827; border-radius: 35px; border: 1px solid var(--border); text-align: center; position: relative; z-index: 10; }
+        .profile-img { width: 100%; border-radius: 20px; margin-bottom: 20px; }
+        
+        .glow-effect {
+            position: absolute; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.5) 0%, transparent 70%);
+            border-radius: 50%; filter: blur(50px); z-index: 1;
+            animation: pulse 4s infinite alternate;
+        }
+        @keyframes pulse { from { transform: scale(0.8); opacity: 0.4; } to { transform: scale(1.1); opacity: 0.8; } }
 
-        /* --- EXPERTISE --- */
-        .expertise-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 80px 0; }
-        .card-exp { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 30px; cursor: pointer; transition: 0.4s; }
-        .card-exp:hover { border-color: var(--primary); transform: translateY(-5px); }
-        .card-exp i { font-size: 2rem; color: var(--primary); margin-bottom: 15px; display: block; }
+        /* --- EXPERTISE (DENGAN IKON ASLI) --- */
+        .expertise-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin: 80px 0; padding-bottom: 100px; }
+        .card-exp { background: var(--card-bg); border: 1px solid var(--border); border-radius: 25px; padding: 40px; cursor: pointer; transition: 0.4s; }
+        .card-exp:hover { border-color: var(--primary); transform: translateY(-10px); }
+        .card-exp i { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; display: block; }
 
-        /* --- MODAL POP-UP (ABOUT & FOTO) --- */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(3, 7, 18, 0.95); z-index: 3000; justify-content: center; align-items: center; }
+        /* --- MODAL --- */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(3, 7, 18, 0.98); z-index: 3000; justify-content: center; align-items: center; backdrop-filter: blur(15px); }
         .modal-overlay.active { display: flex; }
-        .modal-content { background: #0f172a; padding: 40px; border-radius: 25px; border: 1px solid var(--primary); max-width: 500px; width: 90%; position: relative; text-align: center; }
+        .modal-content { background: #0f172a; padding: 50px; border-radius: 35px; border: 1px solid var(--primary); max-width: 600px; width: 90%; position: relative; text-align: center; }
         #fire-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
-        .modal-img { max-width: 90%; max-height: 80vh; border: 2px solid var(--primary); border-radius: 10px; }
+        
+        .modal-text { text-align: left; position: relative; z-index: 10; }
+        .modal-text h2 { color: var(--primary); margin-bottom: 25px; text-align: center; font-size: 2rem; }
+        .modal-text p { color: #cbd5e1; line-height: 1.9; margin-bottom: 15px; }
 
         @media (max-width: 850px) {
             .nav-links { display: none; }
             .menu-toggle { display: block; }
-            .hero { flex-direction: column; text-align: center; padding-top: 120px; }
+            .hero { flex-direction: column; text-align: center; padding-top: 130px; }
             .social-icons { justify-content: center; }
             .expertise-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
+
+    <div class="bg-animate"></div>
 
     <header>
         <div class="header-container">
@@ -105,44 +125,39 @@
                 <li><a href="#home">Home</a></li>
                 <li><span onclick="openAbout()">About</span></li>
                 <li><a href="#expertise">Expertise</a></li>
-                <li><a href="https://wa.me/62895383165361" style="color:var(--primary)">Contact</a></li>
+                <li><a href="https://wa.me/62895383165361" style="color:var(--primary); font-weight:800;">Contact</a></li>
             </ul>
             <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
         </div>
     </header>
 
-    <div class="mobile-nav" id="mobileNav">
-        <div style="text-align:right; font-size:2rem;" onclick="toggleMenu()">&times;</div>
-        <a href="#home" onclick="toggleMenu()">Home</a>
-        <span onclick="openAbout(); toggleMenu()">About</span>
-        <a href="#expertise" onclick="toggleMenu()">Expertise</a>
-        <a href="https://wa.me/62895383165361">Contact</a>
-    </div>
-
     <div class="container">
         <section class="hero" id="home">
             <div class="hero-text" data-aos="fade-right">
+                
                 <div class="page-logo-wrapper">
-                    <div class="glow-effect"></div>
                     <div class="rotating-logo-container">
-                        <img src="nama logo.JPG" alt="Logo">
+                        <img src="logo.jpg" alt="Logo JeksStars">
                     </div>
                 </div>
+
                 <p class="slogan">Trade Like A Star</p>
                 <h1>Ahmad Zaky</h1>
-                <p style="color:#9ca3af;">Profesional trader yang fokus pada hasil konsisten melalui analisis tajam.</p>
+                <p class="hero-description">Sebagai trader profesional, saya fokus pada hasil yang konsisten melalui disiplin dan analisis yang tajam.</p>
+                
                 <div class="social-icons">
-                    <a href="https://wa.me/62895383165361" class="icon-box"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://instagram.com/whojekys" class="icon-box"><i class="fab fa-instagram"></i></a>
-                    <a href="https://tiktok.com/@whojekys" class="icon-box"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://wa.me/62895383165361" class="icon-box" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/whojekys" class="icon-box" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://tiktok.com/@whojekys" class="icon-box" target="_blank"><i class="fab fa-tiktok"></i></a>
                 </div>
             </div>
 
             <div class="hero-visual" data-aos="fade-left">
-                <div class="main-card">
-                    <img src="wajah.jpg" class="profile-img" alt="Zaky">
+                <div class="main-card" data-tilt>
+                    <div class="glow-effect"></div>
+                    <img src="wajah.jpg" class="profile-img" alt="Ahmad Zaky">
                     <h3>JEKSSTARS</h3>
-                    <p style="color:var(--accent); font-weight:800; font-size:0.8rem;">PRO TRADER</p>
+                    <p style="color:var(--accent); font-weight:800; font-size:0.85rem; letter-spacing:1px;">PRO TRADER</p>
                 </div>
             </div>
         </section>
@@ -154,7 +169,7 @@
                 <p>Memetakan area harga krusial untuk menentukan titik pantulan yang valid.</p>
             </div>
             <div class="card-exp" data-aos="fade-up" data-aos-delay="100" onclick="showImg('keahlian2.jpg')">
-                <i class="fas fa-microchip"></i>
+                <i class="fas fa-money-bill-trend-up"></i>
                 <h3>ANALISIS & SET UP</h3>
                 <p>Menyusun set up trading berdasarkan analisis market terakhir.</p>
             </div>
@@ -164,52 +179,48 @@
     <div class="modal-overlay" id="modalAbout">
         <canvas id="fire-canvas"></canvas>
         <div class="modal-content">
-            <span onclick="closeAbout()" style="position:absolute; top:10px; right:20px; font-size:2rem; cursor:pointer;">&times;</span>
-            <h2 style="color:var(--primary); margin-bottom:20px;">Visi & Misi</h2>
-            <p style="color:#cbd5e1; line-height:1.6; text-align:left;">
-                <strong>Visi:</strong> Menjadi platform edukasi trading terdepan yang membantu trader mencapai kemandirian finansial.<br><br>
-                <strong>Misi:</strong> Memberikan analisis pasar akurat, membangun mentalitas disiplin, dan strategi teruji bagi komunitas JeksStars.
-            </p>
+            <span style="position:absolute; top:15px; right:25px; font-size:2.5rem; color:#fff; cursor:pointer; z-index:20;" onclick="closeAbout()">&times;</span>
+            <div class="modal-text">
+                <h2>Visi & Misi JeksStars</h2>
+                <p>• <strong>Visi:</strong> Menjadi platform edukasi trading terdepan yang membantu trader mencapai kemandirian finansial.</p>
+                <p>• <strong>Misi:</strong> Memberikan analisis pasar yang akurat, membangun mentalitas disiplin, dan menyediakan strategi teruji bagi komunitas.</p>
+            </div>
         </div>
     </div>
 
     <div class="modal-overlay" id="modalFoto">
-        <span onclick="closeImg()" style="position:absolute; top:20px; right:30px; font-size:3rem; cursor:pointer;">&times;</span>
-        <img src="" id="modalImg" class="modal-img">
+        <span onclick="closeImg()" style="position:absolute; top:20px; right:30px; font-size:3.5rem; color:#fff; cursor:pointer; z-index:20;">&times;</span>
+        <img src="" id="modalImg" style="max-width:90%; max-height:80vh; border:3px solid var(--primary); border-radius:20px;">
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
     <script>
-        AOS.init({ duration: 1000 });
-        function toggleMenu() { document.getElementById('mobileNav').classList.toggle('active'); }
-        
-        // Modal About
+        AOS.init({ duration: 1000, once: true });
         function openAbout() { document.getElementById('modalAbout').classList.add('active'); startFire(); }
         function closeAbout() { document.getElementById('modalAbout').classList.remove('active'); }
-        
-        // Modal Foto
         function showImg(src) { document.getElementById('modalFoto').classList.add('active'); document.getElementById('modalImg').src = src; }
         function closeImg() { document.getElementById('modalFoto').classList.remove('active'); }
 
-        // Tilt
-        VanillaTilt.init(document.querySelector(".main-card"), { max: 20, speed: 1000, glare: true, "max-glare": 0.5, gyroscope: true });
+        VanillaTilt.init(document.querySelector(".main-card"), {
+            max: 15, speed: 800, glare: true, "max-glare": 0.4, gyroscope: true
+        });
 
-        // Animasi Api Ungu
+        // Api Ungu
         const canvas = document.getElementById('fire-canvas');
         const ctx = canvas.getContext('2d');
+        let p = [];
         function startFire() {
             canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            let p = []; for(let i=0; i<50; i++) p.push({x: Math.random()*canvas.width, y: canvas.height, s: Math.random()*3, v: Math.random()*2});
-            function anim() {
-                if(!document.getElementById('modalAbout').classList.contains('active')) return;
-                ctx.clearRect(0,0,canvas.width,canvas.height);
-                ctx.fillStyle = "rgba(168, 85, 247, 0.3)";
-                p.forEach(i => { i.y -= i.v; if(i.y<0) i.y=canvas.height; ctx.beginPath(); ctx.arc(i.x, i.y, i.s, 0, 7); ctx.fill(); });
-                requestAnimationFrame(anim);
-            } anim();
+            p = []; for(let i=0; i<60; i++) p.push({x: Math.random()*canvas.width, y: canvas.height, s: Math.random()*3+1, v: Math.random()*2+0.5, a: Math.random()*0.5});
+            anim();
+        }
+        function anim() {
+            if(!document.getElementById('modalAbout').classList.contains('active')) return;
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            p.forEach(i => { i.y -= i.v; if(i.y<0) i.y=canvas.height; ctx.fillStyle=`rgba(168, 85, 247, ${i.a})`; ctx.beginPath(); ctx.arc(i.x, i.y, i.s, 0, 7); ctx.fill(); });
+            requestAnimationFrame(anim);
         }
     </script>
 </body>
-                </html>
-            
+</html>
