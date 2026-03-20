@@ -11,12 +11,13 @@
     
     <style>
         :root {
-            --primary: #a855f7; /* Purple Neon */
-            --accent: #fbbf24;  /* Gold Star */
-            --bg: #020617;      /* Deep Dark */
-            --glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.08);
-            --iridescent: linear-gradient(135deg, rgba(168,85,247,0.4), rgba(0,255,255,0.4), rgba(251,191,36,0.3));
+            --primary: #a855f7;
+            --accent: #fbbf24;
+            --bg: #030712;
+            --card-bg: rgba(17, 24, 39, 0.7);
+            --border: rgba(255, 255, 255, 0.05);
+            --text-main: #f3f4f6;
+            --text-dim: #9ca3af;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
@@ -24,128 +25,101 @@
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background-color: var(--bg);
-            color: #fff;
-            line-height: 1.6;
+            color: var(--text-main);
             overflow-x: hidden;
         }
 
-        /* --- NAVIGATION (POJOK KANAN ATAS) --- */
+        /* --- NAVIGATION (KANAN ATAS) --- */
         header {
             position: fixed; top: 0; width: 100%; z-index: 1000;
             padding: 25px 8%; display: flex; justify-content: space-between; align-items: center;
-            background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(15px);
+            background: rgba(3, 7, 18, 0.8); backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
         }
 
-        .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: 2px; text-decoration: none; color: #fff; }
+        .logo { font-size: 1.2rem; font-weight: 800; letter-spacing: 1px; color: #fff; text-decoration: none; }
         .logo span { color: var(--primary); }
 
         .nav-links { display: flex; gap: 35px; list-style: none; }
         .nav-links a { 
-            text-decoration: none; color: #94a3b8; font-size: 0.85rem; 
-            font-weight: 600; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;
-            position: relative;
-        }
-        .nav-links a::after {
-            content: ''; position: absolute; width: 0; height: 2px; 
-            bottom: -5px; left: 0; background: var(--primary); transition: 0.3s;
+            text-decoration: none; color: var(--text-dim); font-size: 0.85rem; 
+            font-weight: 600; transition: 0.3s; text-transform: uppercase;
         }
         .nav-links a:hover { color: #fff; }
-        .nav-links a:hover::after { width: 100%; }
 
-        /* --- HERO SECTION (LAYOUT DUA KOLOM) --- */
+        /* --- HERO SECTION --- */
         .container { max-width: 1100px; margin: 0 auto; padding: 0 5%; }
         .hero { 
             min-height: 100vh; display: flex; align-items: center; 
-            justify-content: space-between; gap: 50px; padding-top: 100px;
+            justify-content: space-between; gap: 50px; padding-top: 80px;
         }
 
-        .hero-content { flex: 1.2; text-align: left; }
-        .hero-content h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 15px; letter-spacing: -2px; }
-        .slogan { color: var(--accent); font-size: 1rem; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 30px; display: block; }
-        .hero-desc { font-size: 1.1rem; color: #94a3b8; margin-bottom: 40px; max-width: 500px; }
+        .hero-text { flex: 1.2; text-align: left; }
+        .hero-text h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 20px; }
+        .hero-text p { color: var(--text-dim); font-size: 1.1rem; margin-bottom: 35px; }
 
-        /* Social Bar */
-        .social-bar { display: flex; gap: 15px; }
-        .btn-social {
-            width: 48px; height: 48px; border-radius: 14px; background: var(--glass);
+        .social-links { display: flex; gap: 15px; }
+        .social-links a {
+            width: 45px; height: 45px; border-radius: 10px; background: var(--card-bg);
             border: 1px solid var(--border); display: flex; align-items: center; 
             justify-content: center; color: #fff; text-decoration: none; transition: 0.3s;
         }
-        .btn-social:hover { transform: translateY(-5px); border-color: var(--primary); color: var(--primary); box-shadow: 0 10px 20px rgba(168, 85, 247, 0.2); }
+        .social-links a:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-3px); }
 
-        /* Sisi Kanan: Kartu Profil Interaktif */
+        /* Kartu Profil Utama */
         .hero-visual { flex: 0.8; display: flex; justify-content: flex-end; perspective: 1000px; }
         .main-card {
-            width: 320px; padding: 25px; background: var(--bg); border-radius: 24px;
-            border: 1px solid var(--border); position: relative; overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5); cursor: pointer;
-            transform-style: preserve-3d;
+            width: 320px; padding: 25px; background: var(--card-bg); border-radius: 24px;
+            border: 1px solid var(--border); cursor: pointer; transform-style: preserve-3d;
         }
-        .main-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--iridescent); filter: blur(40px); opacity: 0.2; z-index: -1;
-        }
-
         .profile-img {
             width: 100%; height: 280px; object-fit: cover; border-radius: 18px;
             margin-bottom: 20px; border: 1px solid var(--border);
-            transform: translateZ(30px);
             animation: pulseGlow 4s infinite ease-in-out;
         }
         @keyframes pulseGlow {
             0%, 100% { box-shadow: 0 0 10px rgba(168, 85, 247, 0.1); }
-            50% { box-shadow: 0 0 30px rgba(168, 85, 247, 0.4); }
+            50% { box-shadow: 0 0 25px rgba(168, 85, 247, 0.3); }
         }
 
-        .card-info { text-align: center; transform: translateZ(20px); }
-        .card-info h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 5px; }
-        .card-info p { font-size: 0.8rem; color: var(--primary); font-weight: 700; letter-spacing: 2px; }
-
-        /* --- SECTION BOXES --- */
+        /* --- EXPERTISE (CLICK TO SHOW IMAGE) --- */
         section { padding: 100px 0 60px; }
-        .label { color: var(--primary); font-size: 0.75rem; font-weight: 800; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px; display: block; }
+        .label { color: var(--primary); font-size: 0.7rem; font-weight: 800; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px; display: block; }
         
-        .glass-box { 
-            background: var(--glass); border: 1px solid var(--border);
-            padding: 40px; border-radius: 30px; margin-bottom: 40px;
-        }
-        .glass-box p { font-size: 1.1rem; color: #cbd5e1; line-height: 1.8; }
-
-        /* Expertise Cards */
         .grid-expertise { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
         .card-exp {
-            background: var(--glass); padding: 35px; border-radius: 24px;
-            border: 1px solid var(--border); transition: 0.4s;
+            background: var(--card-bg); padding: 35px; border-radius: 20px;
+            border: 1px solid var(--border); transition: 0.4s; cursor: pointer;
         }
-        .card-exp:hover { border-color: var(--primary); transform: translateY(-10px); background: rgba(168, 85, 247, 0.02); }
-        .card-exp i { font-size: 2.2rem; color: var(--primary); margin-bottom: 25px; display: block; }
+        .card-exp:hover { border-color: var(--primary); transform: translateY(-5px); }
+        .card-exp i { font-size: 2rem; color: var(--primary); margin-bottom: 20px; display: block; }
+        .click-hint { font-size: 0.7rem; color: var(--primary); font-weight: 700; opacity: 0.6; }
 
-        /* --- ANIMATIONS --- */
+        /* --- MODAL BOX (BOX UNTUK FOTO) --- */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(15px);
+            z-index: 2000; justify-content: center; align-items: center; padding: 20px;
+        }
+        .modal.active { display: flex; }
+        .modal-content { max-width: 90%; max-height: 80vh; border-radius: 15px; box-shadow: 0 0 30px var(--primary); }
+        .close-modal { position: absolute; top: 20px; right: 30px; font-size: 2rem; color: #fff; cursor: pointer; }
+
+        /* Bintang Silver */
         .star-particle {
             position: absolute; width: 10px; height: 10px; background: var(--accent);
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-            pointer-events: none; z-index: 100;
+            pointer-events: none;
         }
 
-        .blink-wrap { position: relative; overflow: hidden; }
-        .blink-wrap::after {
-            content: ''; position: absolute; top: 0; left: -150%; width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.15), transparent);
-            transform: skewX(-20deg); animation: blinkMove 7s infinite;
-        }
-        @keyframes blinkMove { 0% { left: -150%; } 20% { left: 150%; } 100% { left: 150%; } }
-
-        footer { text-align: center; padding: 60px 0; border-top: 1px solid var(--border); opacity: 0.4; font-size: 0.75rem; letter-spacing: 1px; }
+        footer { text-align: center; padding: 50px 0; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.8rem; }
 
         @media (max-width: 900px) {
-            header { padding: 20px 5%; }
-            .nav-links { display: none; }
-            .hero { flex-direction: column; text-align: center; padding-top: 140px; }
-            .hero-content h1 { font-size: 2.8rem; }
-            .hero-content { margin-bottom: 50px; }
+            .hero { flex-direction: column; text-align: center; padding-top: 120px; }
+            .hero-text h1 { font-size: 2.5rem; }
             .hero-visual { width: 100%; justify-content: center; }
-            .social-bar { justify-content: center; }
+            .nav-links { display: none; }
+            .social-links { justify-content: center; }
         }
     </style>
 </head>
@@ -163,92 +137,63 @@
 
     <div class="container">
         <section class="hero" id="home">
-            <div class="hero-content" data-aos="fade-right">
-                <span class="slogan">Trade Like A Star</span>
+            <div class="hero-text" data-aos="fade-right">
+                <h1 style="color: var(--accent); font-size: 0.9rem; letter-spacing: 5px; text-transform: uppercase;">Trade Like A Star</h1>
                 <h1>Ahmad Zaky</h1>
-                <p class="hero-desc">Professional Trader & Financial Educator spesialisasi Price Action. Menghadirkan presisi analisis untuk pertumbuhan portofolio Anda.</p>
-                <div class="social-bar">
-                    <a href="https://wa.me/62895383165361" target="_blank" class="btn-social"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://instagram.com/whojekys" target="_blank" class="btn-social"><i class="fab fa-instagram"></i></a>
-                    <a href="https://tiktok.com/@whojekys" target="_blank" class="btn-social"><i class="fab fa-tiktok"></i></a>
+                <p>Spesialis Price Action dan Market Analysis. Menghadirkan presisi analisis untuk pertumbuhan portofolio Anda.</p>
+                <div class="social-links">
+                    <a href="https://wa.me/62895383165361" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/whojekys" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://tiktok.com/@whojekys" target="_blank"><i class="fab fa-tiktok"></i></a>
                 </div>
             </div>
-
             <div class="hero-visual" data-aos="fade-left">
-                <div class="main-card blink-wrap" id="profileCard" data-tilt data-tilt-max="12" data-tilt-speed="500">
+                <div class="main-card" id="profileCard" data-tilt>
                     <img src="wajah.jpg" alt="Ahmad Zaky" class="profile-img">
-                    <div class="card-info">
+                    <div style="text-align: center;">
                         <h3>Ahmad Zaky</h3>
-                        <p>PRO TRADER</p>
+                        <p style="color: var(--primary); font-weight: 700; font-size: 0.8rem;">PRO TRADER</p>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section id="about" data-aos="fade-up">
-            <span class="label">01 / About Me</span>
-            <div class="glass-box">
-                <p>Halo! Saya <strong>Ahmad Zaky</strong>. Sebagai spesialis dalam dunia trading, saya mendedikasikan diri untuk memahami dinamika pasar secara mendalam. Saya percaya bahwa kesuksesan finansial bermula dari kombinasi antara strategi yang tajam dan mentalitas yang tenang.</p>
-            </div>
-        </section>
-
-        <section id="vision" data-aos="fade-up">
-            <span class="label">02 / Vision & Mission</span>
-            <div class="glass-box" style="border-left: 4px solid var(--accent);">
-                <p style="font-style: italic; font-size: 1.2rem; color: #fff;">"Mensinergikan presisi analisis Price Action dengan disiplin manajemen risiko yang ketat untuk mengorkestrasi pertumbuhan portofolio yang stabil dan berkelanjutan bagi masa depan."</p>
             </div>
         </section>
 
         <section id="expertise">
             <span class="label">03 / My Expertise</span>
             <div class="grid-expertise">
-                <div class="card-exp" data-aos="zoom-in">
+                <div class="card-exp" data-aos="zoom-in" onclick="openModal('keahlian.jpg')">
                     <i class="fas fa-chart-line"></i>
                     <h3>Trading Setup</h3>
-                    <p>Analisis Price Action presisi tinggi dengan sistem entri yang terukur dan disiplin.</p>
+                    <p>Klik untuk melihat analisis setup price action presisi tinggi.</p>
+                    <span class="click-hint">Lihat Foto Analisis →</span>
                 </div>
-                <div class="card-exp" data-aos="zoom-in" data-aos-delay="150">
+                
+                <div class="card-exp" data-aos="zoom-in" data-aos-delay="100" onclick="openModal('keahlian2.jpg')">
                     <i class="fas fa-microscope"></i>
                     <h3>Market Analysis</h3>
-                    <p>Pemahaman siklus Supply & Demand pasar untuk memetakan peluang keuntungan maksimal.</p>
+                    <p>Klik untuk melihat pemetaan Supply & Demand market cycle.</p>
+                    <span class="click-hint">Lihat Foto Analisis →</span>
                 </div>
             </div>
         </section>
 
-        <footer>
-            &copy; 2026 Ahmad Zaky | JeksStars Professional Portfolio
-        </footer>
+        <footer>&copy; 2026 Ahmad Zaky | JeksStars Professional Portfolio</footer>
+    </div>
+
+    <div class="modal" id="modalBox" onclick="closeModal()">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modalImg">
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
     <script>
         AOS.init({ duration: 1000, once: true });
-
-        // Efek Ledakan Bintang Silver saat Klik Kartu
-        const profileCard = document.getElementById('profileCard');
-        profileCard.addEventListener('click', function(e) {
-            // Animasi Flash Terang
-            this.style.filter = "brightness(1.8)";
-            setTimeout(() => this.style.filter = "brightness(1)", 400);
-
-            for (let i = 0; i < 15; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star-particle');
-                this.appendChild(star);
-                
-                const angle = Math.random() * Math.PI * 2;
-                const dist = 80 + Math.random() * 120;
-                const x = Math.cos(angle) * dist;
-                const y = Math.sin(angle) * dist;
-
-                star.animate([
-                    { transform: 'translate(-50%, -50%) scale(0)', opacity: 0 },
-                    { transform: 'translate(-50%, -50%) scale(1.5)', opacity: 1, offset: 0.2 },
-                    { transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(0)`, opacity: 0 }
-                ], { duration: 1500, easing: 'cubic-bezier(0.1, 0.8, 0.4, 1)' }).onfinish = () => star.remove();
-            }
-        });
-    </script>
-</body>
-</html>
+        
+        // Modal Logic
+        function openModal(src) {
+            document.getElementById('modalBox').classList.add('active');
+            document.getElementById('modalImg').src = src;
+        }
+        function
+    
